@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste grátis</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .quiz-container {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            margin: auto;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        .imagens-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 1rem 0;
+        }
+        .imagens-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+        .botao-acao {
+            background-color: #d40000;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: calc(100% - 2rem);
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            display: block;
+            margin: 1.5rem auto 0;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(212, 0, 0, 0.7);
+            }
+            70% {
+                transform: scale(1.02);
+                box-shadow: 0 0 0 8px rgba(212, 0, 0, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(212, 0, 0, 0);
+            }
+        }
+        
+        .botao-acao:hover {
+            background-color: #b30000;
+            transform: translateY(-2px);
+        }
+
+        .botao-subtexto {
+            font-size: 14px;
+            color: #777;
+            margin-top: 5px;
+            display: block;
+            font-style: italic;
+        }
+
+        p {
+            color: #000000;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+        
+        ul {
+            text-align: left;
+            padding-left: 20px;
+            margin: 1.5rem 0;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            list-style-type: none;
+            position: relative;
+            padding-left: 25px;
+            line-height: 1.4;
+        }
+        
+        li:before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Estilo do alerta */
+        .alerta-oferta {
+            color: #d40000;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 15px 0;
+            padding: 10px;
+            border: 2px solid #ff0000;
+            border-radius: 8px;
+            background-color: #fff0f0;
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        /* Timer de escassez */
+        .timer-container {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            animation: pulse-timer 2s infinite;
+        }
+        
+        @keyframes pulse-timer {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+            }
+        }
+        
+        .timer-title {
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .timer-digits {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .timer-unit {
+            background-color: #d40000;
+            padding: 10px;
+            border-radius: 5px;
+            width: 40px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .timer-label {
+            font-size: 10px;
+            margin-top: 5px;
+        }
+    </style>
+    <!-- Código do Pixel do Facebook -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '838634731699598'); // Substitua pelo seu ID do Pixel
+        fbq('track', 'PageView'); // Rastreia visualizações de página
+
+        // Script para o timer regressivo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Define o timer para 30 minutos (em segundos)
+            let timeLeft = 12 * 60;
+            
+            function updateTimer() {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                
+                document.getElementById('timer-minutes').innerText = minutes.toString().padStart(2, '0');
+                document.getElementById('timer-seconds').innerText = seconds.toString().padStart(2, '0');
+                
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    setTimeout(updateTimer, 1000);
+                } else {
+                    document.querySelectorAll('.timer-expired-text').forEach(el => {
+                        el.style.display = 'block';
+                    });
+                }
+            }
+            
+            updateTimer();
+        });
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none" 
+        src="https://www.facebook.com/tr?id=838634731699598&ev=PageView&noscript=1"/>
+    </noscript>
+</head>
+<body>
+    <div class="quiz-container">
+        <h3>Só hoje e nessa página você poderá ter acesso ao <span style="color: red;">Código da Mulher Hipnótica</span> + Bônus Extras com 80% de desconto!</h3>
+        
+        
+        
+        <div class="imagens-container">
+            <img src="src/img/cel.png" alt="Relato 1"/>
+        </div>
+        <p>Você ira aprender de forma <span style="font-weight: bold;">fácil, simples e objetiva, e sem enrolação,</span> cada um dos <span style="color: red;">Códigos Hipnóticos</span> que são necessários para deixar qualquer homem <span style="font-weight: bold;">LOUCO E OBCECADO</span> por você!</p>
+        <p>Esse <span style="font-weight: bold;">método é tão fácil e simples de aprender</span> e de praticar que até o final dessa semana, <span style="font-weight: bold;">você vai saber exatamente o que precisa fazer</span> para deixar qualquer <span style="color: red;">homem louco por você!</span></p>
+        <h3 style="color: red; font-weight: bold;">O que você irá receber de presente:</h3>
+        <p style="font-weight: bold;">✅ CÓDIGO DA MULHER HIPNÓTICA</p>
+        <p>🎁 Bônus: GUIA LENDO UM HOMEM <span style="color: red; text-decoration: line-through;">R$27</span></p>
+        <div class="imagens-container">
+            <img src="src/img/guiaLendoHomem.png" alt="Relato 1"/>
+        </div>
+        <p>🎁 Bônus: COMO FAZER ELE SENTIR SUA FALTA <span style="color: red; text-decoration: line-through;">R$27</span></p>
+        <div class="imagens-container">
+            <img src="src/img/fazerEleSentirFalta.png" alt="Relato 1"/>
+        </div>
+        <p>🎁 Bônus: 18 GATILHOS DA SEDUÇÃO NA PRÁTICA <span style="color: red; text-decoration: line-through;">R$47</span></p>
+        <div class="imagens-container">
+            <img src="src/img/18gatilhosdaSeducao.png" alt="Relato 1"/>
+        </div>
+        <p>🎁 Bônus: GUIA DO AMOR ETERNO <span style="color: red; text-decoration: line-through;">R$47</span></p>
+        <div class="imagens-container">
+            <img src="src/img/GuiaAmorEterno.png" alt="Relato 1"/>
+        </div>
+        <p>🎁 Bônus: GUIA DOS 17 ERROS MORTAIS <span style="color: red; text-decoration: line-through;">R$29</span></p>
+        <p>escolha a opção abaixo</p>
+        <div class="imagens-container">
+            <img src="src/img/Guia17Erros.png" alt="Relato 1"/>
+        </div>
+        <p>🎁Bônus: MANUSCRITO PROBIDO <span style="color: red; text-decoration: line-through;">R$17</span></p>
+        <div class="imagens-container">
+            <img src="src/img/ManuscritoProibido.png" alt="Relato 1"/>
+        </div>
+        <p style="font-weight: bold;">Ainda você vai ter:</p>
+        <ul>
+            <li>Acesso Vitalício</li>
+            <li>Garantia incondicional de 30 dias</li>
+            <li>Acesso ao grupo vip do Whatsapp</li>
+        </ul>
+        <p>Se você fosse comprar todos esses produtos separadamente, você pagaria:</p>
+        <p style="font-weight: bold;">Um total de: <span style="color: red; text-decoration: line-through;">R$274,00</span></p>
+        <p>Mas se você comprar <span style="font-weight: bold;">agora</span> você vai levar tudo isso que foi listado acima</p>
+        <p style="font-weight: bold;">POR APENAS:</p>
+        <p style="font-weight: bold; color: rgb(1, 255, 1);">R$27,00</p>
+        
+        <!-- Botão CTA atualizado -->
+        <a class="botao-acao" onclick="location.href='https://pay.cakto.com.br/di2uak6'">SIM, EU QUERO ELE VICIADO EM MIM!</a>
+        <span class="botao-subtexto">🕒 Oferta expira em poucas horas</span>
+        <!-- Timer de escassez adicionado aqui -->
+        <div class="timer-container">
+            <div class="timer-title">⏱️ ESTA OFERTA EXPIRA EM:</div>
+            <div class="timer-digits">
+                <div class="timer-unit">
+                    <span id="timer-minutes">30</span>
+                    <div class="timer-label">MIN</div>
+                </div>
+                <div style="font-size: 24px; align-self: center;">:</div>
+                <div class="timer-unit">
+                    <span id="timer-seconds">00</span>
+                    <div class="timer-label">SEG</div>
+                </div>
+            </div>
+        </div>
+        <!-- Alerta novo adicionado aqui -->
+        <div class="alerta-oferta">
+            ⚠️ OFERTA VÁLIDA SOMENTE ATÉ HOJE!!
+        </div>
+
+        <div class="imagens-container">
+            <img src="src/img/formasdepagamentovolk.webp"  alt="Relato 1"/>
+        </div>
+        <p style="color: #00a859;">Veja esse depoimento da Luíza</p>
+        <div class="imagens-container">
+            <img src="src/img/luizadp1.png" alt="Relato 1"/>
+        </div>
+        <div class="imagens-container">
+            <img src="src/img/luizadp2.png" alt="Relato 1"/>
+        </div>
+        <p style="color: yellow;">VOCÊ MERECE ISSO!</p>
+        <div class="imagens-container">
+            <img src="src/img/meterial.png" alt="Relato 1"/>
+        </div>
+        <p>Você levará o <span style="color: red;">Código da Mulher Hipnótica</span>, mais todos os bônus</p>
+        <p>De: <span style="color: red; text-decoration: line-through;">R$274,00</span></p>
+        <p>POR APENAS:</p>
+        <P style="font-weight: bold; color: rgb(1, 255, 1);">R$27,00</P>
+        
+        <!-- Segundo timer de escassez para reforçar a urgência -->
+        <div class="timer-container">
+            <div class="timer-title">⏱️ ESTA OFERTA EXPIRA EM:</div>
+            <div class="timer-digits">
+                <div class="timer-unit">
+                    <span id="timer-minutes-2">30</span>
+                    <div class="timer-label">MIN</div>
+                </div>
+                <div style="font-size: 24px; align-self: center;">:</div>
+                <div class="timer-unit">
+                    <span id="timer-seconds-2">00</span>
+                    <div class="timer-label">SEG</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Botão CTA atualizado novamente -->
+        <a class="botao-acao" onclick="location.href='https://pay.cakto.com.br/di2uak6'">ATIVAR OS GATILHOS AGORA!</a>
+        <span class="botao-subtexto">🕒 Oferta expira em poucas horas</span>
+        
+        <!-- Alerta novo adicionado aqui -->
+        <div class="alerta-oferta">
+            ⚠️ OFERTA VÁLIDA SOMENTE ATÉ HOJE!!
+        </div>
+
+        <div class="imagens-container">
+            <img src="src/img/formasdepagamentovolk.webp"  alt="Relato 1"/>
+        </div>
+        <p>Está é uma cobrança única, você não terá nenhum valor adicional debitado em seu cartão.</p>
+        <div style="text-align: center; margin: 20px 0;">
+            <h3 style="color: #00a859; font-weight: bold;">✅ GARANTIA INCONDICIONAL DE 30 DIAS</h3>
+            <p style="font-size: 16px; line-height: 1.5;">
+                <span style="font-weight: bold;">Você não tem NADA a perder!</span><br>
+                Se por qualquer motivo você não amar os resultados, basta mandar um email dentro de 30 dias
+                que devolvemos <span style="color: red; font-weight: bold;">TODO seu dinheiro</span>, sem perguntas,
+                sem burocracia. <span style="font-weight: bold;">O risco é 100% meu!</span> 😊
+            </p>
+            
+            <!-- Espaço para o selo de garantia -->
+            <div style="margin: 15px auto; max-width: 150px;">
+                <img src="src/img/30-DIAS-FINAL-1.svg" alt="Selo de Garantia 30 Dias" style="width: 100%;">
+            </div>
+            
+            <p style="font-style: italic; font-size: 14px;">
+                Mais de 97% das nossas clientes amam o produto e nunca pedem reembolso!
+            </p>
+        </div>
+        
+        <!-- Botão CTA atualizado -->
+        <a class="botao-acao" onclick="location.href='https://pay.cakto.com.br/di2uak6'">QUERO O CÓDIGO AGORA!</a>
+        <span class="botao-subtexto">🕒 Oferta expira em poucas horas</span>
+        
+        <div style="margin: 30px 0; text-align: left;">
+            <h3 style="color: #d40000; border-bottom: 2px solid #d40000; padding-bottom: 8px; display: inline-block;">Perguntas Frequentes</h3>
+            
+            <div style="margin-top: 20px; background: #fff8f8; border-radius: 10px; padding: 15px; margin-bottom: 15px;">
+                <p style="font-weight: bold; color: #d40000; margin-bottom: 5px;">➡️ Como vou receber o Código da Mulher Hipnótica?</p>
+                <p style="margin-left: 25px;">Após a confirmação do pagamento, você receberá o guia diretamente no e-mail cadastrado na compra <span style="font-weight: bold;">em até 5 minutos</span>. Caso não encontre, verifique sua pasta de spam ou lixo eletrônico.</p>
+            </div>
+            
+            <div style="margin-top: 15px; background: #fff8f8; border-radius: 10px; padding: 15px; margin-bottom: 15px;">
+                <p style="font-weight: bold; color: #d40000; margin-bottom: 5px;">➡️ O Código da Mulher Hipnótica realmente funciona?</p>
+                <p style="margin-left: 25px;">Sim! O guia foi desenvolvido com base em técnicas psicológicas e comportamentais testadas e comprovadas por especialistas em relacionamentos. <span style="font-weight: bold;">Mais de 8.000 mulheres</span> já comprovaram a eficácia do método.</p>
+            </div>
+            
+            <div style="margin-top: 15px; background: #fff8f8; border-radius: 10px; padding: 15px; margin-bottom: 15px;">
+                <p style="font-weight: bold; color: #d40000; margin-bottom: 5px;">➡️ Tenho garantia caso eu não goste do produto?</p>
+                <p style="margin-left: 25px;">Sim! Oferecemos uma <span style="font-weight: bold;">garantia incondicional de 30 dias</span>. Se você achar que o guia não atendeu às suas expectativas, basta um email para solicitar o reembolso completo. <span style="color: #d40000; font-weight: bold;">Sem perguntas, sem burocracia!</span></p>
+            </div>
+            
+            <div style="margin-top: 15px; background: #fff8f8; border-radius: 10px; padding: 15px;">
+                <p style="font-weight: bold; color: #d40000; margin-bottom: 5px;">➡️ É difícil aplicar as estratégias do guia?</p>
+                <p style="margin-left: 25px;">Não! O material foi desenvolvido para ser <span style="font-weight: bold;">prático e acessível</span>, com instruções passo-a-passo que qualquer mulher pode seguir. Você vai perceber os primeiros resultados <span style="font-weight: bold;">em menos de 7 dias</span>!</p>
+            </div>
+        </div>
+        
+        <!-- Botão CTA final atualizado -->
+        <a class="botao-acao" onclick="location.href='https://pay.cakto.com.br/di2uak6'">SIM, EU QUERO ELE VICIADO EM MIM!</a>
+        <span class="botao-subtexto">🕒 Oferta expira em poucas horas</span>
+    </div>
+    
+    <!-- Script adicional para sincronizar os dois timers -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Esta função atualiza o segundo timer para mostrar os mesmos valores que o primeiro
+            function syncSecondTimer() {
+                const minutes = document.getElementById('timer-minutes').innerText;
+                const seconds = document.getElementById('timer-seconds').innerText;
+                
+                document.getElementById('timer-minutes-2').innerText = minutes;
+                document.getElementById('timer-seconds-2').innerText = seconds;
+                
+                setTimeout(syncSecondTimer, 1000);
+            }
+            
+            syncSecondTimer();
+        });
+    </script>
+</body>
+</html>

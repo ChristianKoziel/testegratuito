@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste grátis</title>
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '838634731699598');
+        fbq('track', 'PageView');
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 22px;
+            margin-bottom: 30px;
+            color: #333;
+            text-align: left;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .checkbox-option:hover {
+            background-color: #f5f5f5;
+        }
+        .checkbox-option input[type="checkbox"] {
+            display: none;
+        }
+        .checkbox-option label {
+            font-size: 16px;
+            color: #444;
+            cursor: pointer;
+            padding-right: 35px;
+            position: relative;
+        }
+        .checkbox-option label::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid #007bff;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .checkbox-option input[type="checkbox"]:checked + label::after {
+            background-color: #007bff;
+            border: 2px solid #007bff;
+            box-shadow: inset 0 0 0 4px #fff;
+        }
+        .continue-btn {
+            margin-top: 30px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        .continue-btn:hover {
+            background-color: #0056b3;
+        }
+        .red {
+            color: #ff4444;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quais <span class="red">estratégias</span> você mais <span class="red">gostaria</span> de dominar?</h1>
+        <form id="strategyForm" action="quiz16.html" method="get">
+            <div class="checkbox-group">
+                <div class="checkbox-option">
+                    <input type="checkbox" id="option1" name="strategy" value="apegar">
+                    <label for="option1">Como fazer ele se apegar a mim</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="option2" name="strategy" value="falta">
+                    <label for="option2">Como fazer ele sentir minha falta</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="option3" name="strategy" value="mente">
+                    <label for="option3">Como ler a mente dele para controlar ele</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="option4" name="strategy" value="apaixonar">
+                    <label for="option4">Como fazer ele se apaixonar profundamente por mim</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="option5" name="strategy" value="proativo">
+                    <label for="option5">Como fazer ele ser mais proativo</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="option6" name="strategy" value="nenhuma">
+                    <label for="option6">Nenhuma das opções acima</label>
+                </div>
+            </div>
+            <button type="submit" class="continue-btn">Continuar</button>
+        </form>
+    </div>
+
+    <script>
+        // Marcar/desmarcar ao clicar na div
+        document.querySelectorAll('.checkbox-option').forEach(option => {
+            option.addEventListener('click', function (e) {
+                const checkbox = this.querySelector('input[type="checkbox"]');
+                checkbox.checked = !checkbox.checked;
+                e.preventDefault(); // evita duplo clique em label
+            });
+        });
+    </script>
+</body>
+</html>

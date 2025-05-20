@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Teste grátis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            background-color: #f0f4f8;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+            -webkit-text-size-adjust: 100%;
+        }
+        /* Tela de Loading */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .loading-text {
+            font-size: clamp(18px, 5vw, 22px);
+            margin-bottom: 20px;
+            color: #1a365d;
+            font-weight: 600;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .progress-container {
+            position: relative;
+            width: 85%;
+            max-width: 320px;
+            margin-bottom: 5px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background-color: #e0e0e0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+        .progress {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(to right, #3b82f6, #38bdf8);
+            animation: progress 3s ease-out forwards;
+            position: relative;
+        }
+        .progress::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: translateX(-100%);
+            animation: shimmer 1.5s infinite;
+        }
+        .progress-percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #1a365d;
+            font-weight: bold;
+            font-size: 11px;
+            z-index: 5;
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
+        }
+        .analyzing-text {
+            margin-top: 10px;
+            color: #3b82f6;
+            font-size: clamp(14px, 4vw, 16px);
+            font-weight: 500;
+            text-align: center;
+            animation: pulse 1.5s infinite alternate;
+        }
+        /* Conteúdo Principal */
+        .container {
+            width: 100%;
+            max-width: 650px;
+            margin: 15px auto;
+            background-color: white;
+            padding: 20px 15px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 3s;
+        }
+        .title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #1a365d;
+            font-size: clamp(18px, 6vw, 22px);
+            font-weight: 700;
+            line-height: 1.4;
+            padding: 0 10px;
+        }
+        /* Container azul para o slider */
+        .blue-box {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            border-radius: 12px;
+            padding: 20px 15px;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        .slider-container {
+            margin: 0;
+            position: relative;
+            padding-bottom: 50px;
+        }
+        .slider-label {
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: block;
+            font-size: clamp(14px, 4vw, 16px);
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        .slider {
+            width: 100%;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 15px;
+            align-items: center;
+            margin-bottom: 30px;
+            overflow: visible;
+        }
+        .slider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, 
+                rgba(255,255,255,0.15) 0%, 
+                rgba(255,255,255,0.05) 100%);
+            border-radius: 18px;
+        }
+        .slider-position {
+            position: relative;
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+        }
+        .slider-text {
+            color: white;
+            font-weight: 600;
+            font-size: clamp(12px, 3.5vw, 14px);
+            z-index: 2;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            position: relative;
+            text-align: center;
+            flex: 1;
+        }
+        .objetivo-label {
+            position: absolute;
+            top: -20px;
+            right: 0;
+            color: #93c5fd;
+            font-weight: 600;
+            font-size: clamp(11px, 3vw, 13px);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            white-space: nowrap;
+        }
+        .slider-marker {
+            position: absolute;
+            left: 28%;
+            top: 50px;
+            background-color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            font-size: clamp(12px, 3.5vw, 14px);
+            font-weight: 600;
+            transform: translateX(-50%);
+            z-index: 5;
+            color: #3b82f6;
+            animation: markerMove 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+            animation-delay: 3.5s;
+            white-space: nowrap;
+        }
+        .section {
+            margin: 25px 0;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .section-title {
+            color: #1a365d;
+            margin-bottom: 15px;
+            font-size: clamp(16px, 4.5vw, 18px);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i, .section-title span {
+            margin-right: 10px;
+            color: #ef4444;
+        }
+        .section p {
+            margin-bottom: 12px;
+            font-size: clamp(14px, 4vw, 16px);
+            line-height: 1.6;
+        }
+        .implication-list {
+            list-style-type: none;
+            margin: 15px 0;
+        }
+        .implication-list li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 30px;
+            font-size: clamp(14px, 4vw, 16px);
+            line-height: 1.5;
+        }
+        .implication-list li:before {
+            content: "❌";
+            position: absolute;
+            left: 0;
+            color: #ef4444;
+            font-size: 16px;
+        }
+        .warning {
+            background-color: #fff3cd;
+            background-image: linear-gradient(to right, #fff3cd, #ffe69c);
+            padding: 18px 12px;
+            border-radius: 10px;
+            margin: 25px 0;
+            text-align: center;
+            font-weight: bold;
+            color: #856404;
+            font-size: clamp(15px, 4.5vw, 18px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-left: 4px solid #ffc107;
+        }
+        .cta-button {
+            display: block;
+            width: 100%;
+            max-width: 280px;
+            margin: 25px auto 10px;
+            padding: 16px;
+            background: linear-gradient(to right, #3b82f6, #38bdf8);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: clamp(15px, 4.5vw, 18px);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+        }
+        .cta-button:after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+            transform: rotate(30deg);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .cta-button:hover:after {
+            opacity: 1;
+            animation: shine 1.5s ease-out;
+        }
+        .red {
+            color: #ef4444;
+        }
+        .fontnegrito {
+            font-weight: 600;
+        }
+        /* Container para flex no mobile */
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 10px;
+        }
+        /* Animações */
+        @keyframes progress {
+            0% { width: 0%; }
+            80% { width: 90%; }
+            100% { width: 100%; }
+        }
+        @keyframes shimmer {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes markerMove {
+            0% { 
+                top: 80px;
+                opacity: 0;
+            }
+            100% { 
+                top: 50px;
+                opacity: 1;
+            }
+        }
+        @keyframes pulse {
+            from {
+                opacity: 0.7;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) rotate(30deg);
+            }
+            100% {
+                transform: translateX(100%) rotate(30deg);
+            }
+        }
+        /* Melhorias para celular */
+        @media (max-width: 480px) {
+            .page-container {
+                padding: 5px;
+            }
+            .container {
+                padding: 15px 10px;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .blue-box {
+                padding: 15px 10px;
+                margin: 20px 0;
+                border-radius: 10px;
+            }
+            .slider {
+                height: 30px;
+                padding: 0 10px;
+                border-radius: 15px;
+            }
+            .slider-marker {
+                padding: 6px 12px;
+                font-size: 12px;
+                top: 45px;
+            }
+            .objetivo-label {
+                top: -18px;
+                font-size: 11px;
+            }
+            .section {
+                margin: 20px 0;
+            }
+            .warning {
+                padding: 15px 10px;
+                font-size: 14px;
+            }
+            .cta-button {
+                padding: 14px;
+                font-size: 15px;
+                max-width: 250px;
+            }
+        }
+    </style>
+    <!-- Código do Pixel do Facebook -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '838634731699598'); // Substitua pelo seu ID do Pixel
+        fbq('track', 'PageView'); // Rastreia visualizações de página
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none" 
+        src="https://www.facebook.com/tr?id=838634731699598&ev=PageView&noscript=1"/>
+    </noscript>
+</head>
+<body>
+    <div class="page-container">
+        <!-- Tela de Loading -->
+        <div id="loading-screen">
+            <div class="loading-text">Estamos analisando suas respostas...</div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <div id="progress-percentage" class="progress-percentage">0%</div>
+            </div>
+            <div class="analyzing-text">Analisando padrões de comportamento...</div>
+        </div>
+        <!-- Conteúdo Principal -->
+        <div class="container">
+            <h1 class="title">Aqui está uma <span class="red">análise inicial</span> das suas respostas</h1>
+            
+            <!-- Container Azul com Slider -->
+            <div class="blue-box">
+                <div class="slider-container">
+                    <label class="slider-label">Nível de Domínio da Psicologia Masculina</label>
+                    <div class="slider">
+                        <div class="slider-position">
+                            <span class="slider-text">Baixo</span>
+                            <span class="slider-text">Médio</span>
+                            <span class="slider-text">
+                                <span class="objetivo-label">Objetivo</span>
+                                Alto
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slider-marker">Você está aqui</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-pencil-alt"></i> Análise descritiva</h2>
+                <p><span style="color: #ef4444;">💔</span>
+                    <span class="fontnegrito">Você é exatamente o tipo de mulher que os homens desperdiçam...</span> não por falta de valor, mas porque <span class="fontnegrito">sua mente ainda não desbloqueou os códigos secretos</span> de <span class="red">manipulação</span> que fazem ele te ver como uma mulher inesquecível e que faça ele ficar completamente obcecado por você.</p>
+            </div>
+            <div class="section">
+                <h2 class="section-title"><span style="font-size: 24px; color: #4CAF50;">🔍</span>
+                    Padrão Detectado:</h2>
+                <p>Existem alguns padrões que provam que você está sendo <span class="fontnegrito">sabotada por armadilhas invisíveis...</span> padrões que indicam que você está sendo sabotada por "armadilhas invisíveis" que você não percebe...</p>
+                <span class="fontnegrito"><p>O que isso significa para você?</p></span>
+            </div>
+            <div class="section">
+                <ul class="implication-list">
+                    <li>Você está fazendo exatamente o que faz um homem perder o interesse</li>
+                    <li>O homem já percebeu que pode ir embora, ainda que fique por perto</li>
+                    <li>Se você continuar assim, esse ciclo vai se repetir e você ficará no mesmo lugar</li>
+                </ul>
+            </div>
+            <div class="warning">
+                <span class="red"><p>🚨 ESTE PADRÃO ESTÁ SABOTANDO SUA VIDA AMOROSA E VOCÊ NUNCA FOI AVISADA!</p></span>
+            </div>
+            <button class="cta-button" onclick="window.location.href='quiz18.html'">Quero mudar isso hoje!</button>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        // Script para atualizar a porcentagem durante o carregamento
+        function updatePercentage() {
+            const progressElement = document.querySelector('.progress');
+            const percentageElement = document.getElementById('progress-percentage');
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                } else {
+                    width++;
+                    percentageElement.textContent = width + '%';
+                }
+            }, 30); // 30ms * 100 ≈ 3s (tempo total da animação da barra)
+        }
+
+        // Iniciar a animação de porcentagem
+        updatePercentage();
+
+        // Remover a tela de loading após 3 segundos
+        setTimeout(() => {
+            document.getElementById('loading-screen').style.display = 'none';
+        }, 3000);
+
+        // Adicionar efeito de pulse ao botão CTA
+        const ctaButton = document.querySelector('.cta-button');
+        setTimeout(() => {
+            ctaButton.classList.add('pulse');
+        }, 4000);
+    </script>
+</body>
+</html>

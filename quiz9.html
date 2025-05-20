@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste grátis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+
+        .quiz-container {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            text-align: left;
+            width: 100%;
+            max-width: 420px;
+            padding: 30px;
+        }
+
+        .question {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            line-height: 1.4;
+            text-align: center;
+            color: #333;
+        }
+
+        .vermelho {
+            color: red;
+            font-weight: bold;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option-button {
+            background-color: #e6f0ff;
+            border: none;
+            border-radius: 8px;
+            padding: 15px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            width: 100%;
+            color: #333;
+        }
+
+        .option-button:hover {
+            background-color: #cce0ff;
+            transform: translateY(-2px);
+        }
+
+        .option-button:active {
+            transform: translateY(0);
+        }
+    </style>
+    <!-- Código do Pixel do Facebook -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '838634731699598'); // Substitua pelo seu ID do Pixel
+        fbq('track', 'PageView'); // Rastreia visualizações de página
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none" 
+        src="https://www.facebook.com/tr?id=838634731699598&ev=PageView&noscript=1"/>
+    </noscript>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="question">
+            Você fica mais <span class="vermelho">frustrada</span> quando..
+        </div>
+        <div class="options">
+            <button class="option-button" onclick="window.location.href='quiz10.html'">
+                Invisto tempo em alguém que depois some
+            </button>
+            <button class="option-button" onclick="window.location.href='quiz10.html'">
+                Sou tratada como opção em vez de prioridade
+            </button>
+            <button class="option-button" onclick="window.location.href='quiz10.html'">
+                Vejo outras conseguindo o que eu mereço
+            </button>
+            <button class="option-button" onclick="window.location.href='quiz10.html'">
+                Sinto que nunca vou ter o relacionamento dos sonhos
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Garantindo que qualquer clique na página redirecione
+        document.addEventListener('click', function() {
+            window.location.href = 'quiz10.html';
+        });
+    </script>
+</body>
+</html>

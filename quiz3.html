@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste grátis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: white;
+    }
+
+    .quiz-container {
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+    }
+
+    .question {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .question span {
+      color: #ff0000;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .option-button {
+      display: flex;
+      align-items: center;
+      background-color: white;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 15px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: left;
+    }
+
+    .option-button:hover {
+      background-color: #f0f0f0;
+      border-color: #999;
+    }
+
+    .option-button:active {
+      background-color: #e0e0e0;
+      transform: scale(0.98);
+    }
+
+    .emoji {
+      font-size: 24px;
+      margin-right: 15px;
+    }
+  </style>
+
+  <!-- Código do Pixel do Facebook -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '838634731699598');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" 
+         src="https://www.facebook.com/tr?id=838634731699598&ev=PageView&noscript=1"/>
+  </noscript>
+</head>
+<body>
+  <div class="quiz-container">
+    <div class="question">
+      Qual o seu principal <span>objetivo</span>?
+    </div>
+    <div class="options">
+      <button class="option-button" onclick="redirectToQuiz()">
+        <span class="emoji">😍</span>
+        Atrair o homem dos sonhos
+      </button>
+      <button class="option-button" onclick="redirectToQuiz()">
+        <span class="emoji">😈</span>
+        Fazer ele ficar obcecado
+      </button>
+      <button class="option-button" onclick="redirectToQuiz()">
+        <span class="emoji">💍</span>
+        Casar
+      </button>
+      <button class="option-button" onclick="redirectToQuiz()">
+        <span class="emoji">❤️</span>
+        Reacender a chama
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function redirectToQuiz() {
+      window.location.href = 'quiz4.html';
+    }
+  </script>
+</body>
+</html>

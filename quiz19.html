@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste grátis</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 24px;
+            color: #000000;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+        .progress-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+        }
+        .progress-bar-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80px;
+        }
+        .progress-bar {
+            width: 40px;
+            height: 180px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            margin: 10px 0;
+        }
+        .progress-bar .fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #d63384;
+            transition: height 0.5s ease;
+        }
+        .progress-bar .marks {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .progress-bar .mark {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        .progress-bar .mark.mark-25 { bottom: 25%; }
+        .progress-bar .mark.mark-50 { bottom: 50%; }
+        .progress-bar .mark.mark-75 { bottom: 75%; }
+        .label-top {
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #666;
+            text-align: center;
+            height: 20px; /* Altura fixa */
+        }
+        .percentage {
+            font-weight: bold;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            color: #000000;
+            text-align: center;
+            height: 20px; /* Altura fixa */
+        }
+        .label-bottom {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #333;
+            text-align: center;
+            width: 100%;
+            height: 60px; /* Altura fixa para todos os textos */
+        }
+        .content {
+            text-align: center;
+            width: 100%;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        .botao-acao {
+            background-color: #0074cc;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            display: block;
+            margin: 20px auto 0;
+            max-width: 100%;
+        }
+        
+        /* Ajustes para dispositivos móveis */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .progress-bar-wrapper {
+                width: 70px;
+            }
+            
+            .progress-bar {
+                width: 35px;
+                height: 150px;
+            }
+            
+            .label-bottom {
+                font-size: 12px;
+            }
+            
+            .botao-acao {
+                padding: 15px;
+                font-size: 18px;
+            }
+        }
+    </style>
+    <!-- Código do Pixel do Facebook -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '838634731699598'); // Substitua pelo seu ID do Pixel
+        fbq('track', 'PageView'); // Rastreia visualizações de página
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none" 
+        src="https://www.facebook.com/tr?id=838634731699598&ev=PageView&noscript=1"/>
+    </noscript>
+</head>
+<body>
+    <div class="container">
+        <h1>Com base em suas respostas, identificamos grande potencial em reverter esses padrões em até <span style="color: rgb(1, 226, 1);">30 dias</span>...</h1><br>
+        <div class="progress-container">
+            <div class="progress-bar-wrapper">
+                <div class="label-top">Hoje</div>
+                <div class="progress-bar">
+                    <div class="marks">
+                        <div class="mark mark-25"></div>
+                        <div class="mark mark-50"></div>
+                        <div class="mark mark-75"></div>
+                    </div>
+                    <div class="fill" style="height: 24%; background-color: red;"></div>
+                </div>
+                <div class="percentage">24%</div>
+                <div class="label-bottom">Aprender o método e dar inicio à sua nova jornada</div>
+            </div>
+            <div class="progress-bar-wrapper">
+                <div class="label-top">15 dias</div>
+                <div class="progress-bar">
+                    <div class="marks">
+                        <div class="mark mark-25"></div>
+                        <div class="mark mark-50"></div>
+                        <div class="mark mark-75"></div>
+                    </div>
+                    <div class="fill" style="height: 51%; background-color: #796d1b;"></div>
+                </div>
+                <div class="percentage">51%</div>
+                <div class="label-bottom">Aprendeu tudo e está começando a aplicar</div>
+            </div>
+            <div class="progress-bar-wrapper">
+                <div class="label-top">30 Dias</div>
+                <div class="progress-bar">
+                    <div class="marks">
+                        <div class="mark mark-25"></div>
+                        <div class="mark mark-50"></div>
+                        <div class="mark mark-75"></div>
+                    </div>
+                    <div class="fill" style="height: 98%; background-color: rgb(7, 248, 7);"></div>
+                </div>
+                <div class="percentage">98%</div>
+                <div class="label-bottom">Você é uma mulher magnética</div>
+            </div>
+        </div>
+        <div class="content">
+            <p>Se você está cansada de só atrair relacionamentos ruins...</p>
+            <p>Está na hora de <span style="font-weight: bold;">virar esse jogo ao seu favor e fazer ele ficar OBCECADO por você!</span></p>
+            <p>Você vai aprender a mexer com o inconsciente dele, fazendo com que ele te deseje cada vez mais <span style="font-weight: bold;">sem nem perceber.</span></p>
+            <p>E quando falamos sobre deixar um homem obcecado em você, estamos falando sobre deixá-lo <span style="font-weight: bold;">VICIADO DE VERDADE.</span></p>
+            <p>Você vai descobrir todos os gatilhos para enlouquecer <span style="font-weight: bold;">qualquer homem</span> através da <span style="font-weight: bold;">manipulação hipnótica</span> e mudança de comportamento.</p>
+            <p>Com alguns passos simples você vai entrar na mente dele, <span style="font-weight: bold;">fazendo com que ele fique completamente nas suas mãos.</span></p>
+            <a class="botao-acao" href="quiz20.html">Continuar</a>
+        </div>
+    </div>
+</body>
+</html>

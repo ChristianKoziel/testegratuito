@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste grátis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: white;
+            cursor: pointer; /* Adiciona cursor pointer em toda página */
+        }
+        .quiz-container {
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+        .question {
+            color: #000;
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .option-button {
+            background-color: white;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 15px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .option-button:hover {
+            background-color: #f0f0f0;
+            border-color: #999;
+        }
+        .option-button:active {
+            background-color: #e0e0e0;
+            transform: scale(0.98);
+        }
+        .corVermelha {
+            color: red;
+        }
+    </style>
+    <!-- Código do Pixel do Facebook -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '838634731699598'); // Substitua pelo seu ID do Pixel
+        fbq('track', 'PageView'); // Rastreia visualizações de página
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none" 
+        src="https://www.facebook.com/tr?id=838634731699598&ev=PageView&noscript=1"/>
+    </noscript>
+</head>
+<body onclick="window.location.href='quiz5.html'">
+    <div class="quiz-container">
+        <div class="question">
+            <span class="corVermelha">Atualmente</span> você está?
+        </div>
+        <div class="options">
+            <button class="option-button">Solteira</button>
+            <button class="option-button">Enrolada</button>
+            <button class="option-button">Namorando</button>
+            <button class="option-button">Casada</button>
+        </div>
+    </div>
+
+    <script>
+        // Garantindo que qualquer clique na página redirecione
+        document.addEventListener('click', function() {
+            window.location.href = 'quiz5.html';
+        });
+    </script>
+</body>
+</html>

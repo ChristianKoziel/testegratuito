@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Teste grátis</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: white;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        .container {
+            max-width: 100%;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            padding: 0 15px;
+        }
+
+        .question {
+            font-size: clamp(20px, 6vw, 28px);
+            margin-bottom: 30px;
+            line-height: 1.4;
+            padding: 0 10px;
+            font-weight: bold;
+        }
+
+        .highlight {
+            color: red;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .button-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            margin: 12px 0;
+            border: 2px solid #000;
+            border-radius: 12px;
+            background-color: white;
+            color: black;
+            font-size: clamp(16px, 4.5vw, 18px);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .button:hover, .button:active {
+            background-color: #000;
+            color: white;
+        }
+        
+        .red {
+            color: red;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 350px) {
+            .question {
+                font-size: 18px;
+                margin-bottom: 25px;
+            }
+            .button {
+                padding: 15px;
+                font-size: 15px;
+            }
+        }
+    </style>
+    <!-- Código do Pixel do Facebook -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '838634731699598'); // Substitua pelo seu ID do Pixel
+        fbq('track', 'PageView'); // Rastreia visualizações de página
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none" 
+        src="https://www.facebook.com/tr?id=838634731699598&ev=PageView&noscript=1"/>
+    </noscript>
+</head>
+<body>
+    <div class="container">
+        <div class="question">
+            O que você faria se existisse um <span class="red">método psicológico</span> comprovado para deixar ele completamente <span class="highlight">OBECEADO</span> em você?
+        </div>
+        
+        <div class="button-container">
+            <a href="quiz17.html" class="button">
+                Eu usaria imediatamente
+            </a>
+            
+            <a href="quiz17.html" class="button">
+                Gostaria de entender como isso funciona antes
+            </a>
+        </div>
+    </div>
+</body>
+</html>
